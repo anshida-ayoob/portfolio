@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anshida Ayoob · Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF; --ink:#15171B; --muted:#5B5E66; --faint:#ABADB0;
+    --accent:#6E4FE0; --accent-tint:#F1EDFB; --accent-tint-2:#E4DBFA;
+    --line:#E3E2DD;
+  }
+  :root[data-theme="dark"]{
+    --bg:#121316; --ink:#EDEDEA; --muted:#A9ABB1; --faint:#5B5D63;
+    --accent:#A48CF2; --accent-tint:#221C33; --accent-tint-2:#2B2340; --line:#2A2C31;
+  }
+  *{box-sizing:border-box;}
+  header, nav, main, section, footer{display:block;}
+  html{scroll-behavior:smooth; scroll-padding-top: calc(64px + env(safe-area-inset-top,0px));}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:700px; margin:0 auto; padding:0 24px;}
+  @media (min-width:748px){
+    .wrap{padding:0;}
+  }
+  header{
+    position:sticky; top:0; z-index:10; background:var(--bg);
+    border-bottom:1px solid var(--line);
+    padding-top: env(safe-area-inset-top,0px);
+  }
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .nav-name{font-family:'Caveat',cursive; font-weight:600; font-size:26px; text-decoration:none; line-height:1;}
+  .nav-links{display:flex; align-items:center; gap:30px; font-size:14px;}
+  .nav-links a{text-decoration:none; color:var(--muted); transition:color .15s ease;}
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--ink);}
+  .nav-links a.resume-link{color:var(--accent); font-weight:500;}
+  .nav-links a.resume-link:hover, .nav-links a.resume-link:focus-visible{color:var(--accent);}
+
+  /* ---- Hero ---- */
+  .hero{padding-top:44px; padding-bottom:72px; border-bottom:1px solid var(--line);}
+  .avatar{
+    width:96px; height:96px; border-radius:22px;
+    overflow:hidden; margin-bottom:30px;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 16px rgba(0,0,0,0.06);
+  }
+  .avatar img{width:100%; height:100%; object-fit:cover; object-position:center center; display:block;}
+  .hero h1{
+    font-family:'Fraunces',Georgia,serif; font-size:clamp(26px,4vw,34px);
+    line-height:1.25; font-weight:500;
+    margin:0 0 20px; max-width:15ch;
+  }
+  .hero p{color:var(--muted); font-size:15.5px; max-width:56ch; margin:0 0 14px;}
+  .hero .role{color:var(--accent); font-weight:500;}
+  .highlight, .hero .highlight, .project-body .highlight, .project-section .highlight{color:var(--accent); font-weight:600;}
+  .contact-row{display:flex; flex-wrap:wrap; gap:18px; margin-top:28px; font-size:14px;}
+  .contact-row a{text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px; transition:border-color .15s ease, color .15s ease;}
+  .contact-row a:hover{border-color:var(--accent); color:var(--accent);}
+
+  /* ---- Section rhythm ---- */
+  section.block{padding-top:72px; padding-bottom:72px; border-bottom:1px solid var(--line);}
+  section.block:last-of-type{border-bottom:none;}
+
+  .section-title{
+    font-size:13px; font-weight:600; color:var(--muted);
+    margin:0 0 4px;
+  }
+  .section-lede{font-size:14px; color:var(--muted); margin:0 0 40px;}
+
+  /* ---- Work (featured cards) ---- */
+  .featured-grid{display:flex; flex-direction:column; gap:8px;}
+  .feature-card{
+    display:flex; align-items:center; gap:20px; width:100%;
+    text-align:left; font:inherit; color:inherit;
+    background:none; border:none; border-radius:14px;
+    padding:14px 12px; margin:0 -12px; cursor:pointer;
+    text-decoration:none;
+    transition:background-color .15s ease;
+  }
+  .feature-card:hover{
+    background-color:rgba(110,79,224,0.04);
+  }
+  .feature-thumb{
+    flex:none; width:120px; aspect-ratio:3/2; height:auto; border-radius:12px;
+    overflow:hidden;
+    background:var(--accent-tint);
+    border:1px solid var(--line);
+    margin-bottom:0; display:flex; align-items:center; justify-content:center;
+  }
+  .feature-thumb img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform .25s ease;
+  }
+  .feature-card:hover .feature-thumb img{
+    transform:scale(1.03);
+  }
+  .feature-thumb svg{width:22px; height:22px; opacity:.5; color:var(--accent);}
+  .feature-content{flex:1; min-width:0;}
+  .feature-header-row{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:4px;}
+  .feature-title{font-size:16.5px; font-weight:600; line-height:1.3;}
+  .feature-sub{display:block; font-size:13.5px; color:var(--muted); line-height:1.45;}
+  .feature-arrow{
+    flex:none; display:flex; color:var(--faint);
+    transition:color .15s ease, transform .15s ease;
+  }
+  .feature-arrow svg{width:15px; height:15px;}
+  .feature-card:hover .feature-arrow, .feature-card:focus-visible .feature-arrow{
+    color:var(--accent);
+    transform:translate(2px, -2px);
+  }
+  .note{font-size:14.5px; color:var(--muted); margin-top:44px; max-width:58ch; line-height:1.6;}
+  .note + .note{margin-top:14px;}
+  .note strong{color:var(--ink); font-weight:500;}
+  .note ul{margin:10px 0 0; padding-left:20px;}
+  .note li{margin-bottom:6px; line-height:1.55;}
+  .note li:last-child{margin-bottom:0;}
+  .note a{color:inherit; text-decoration:none; border-bottom:1px solid var(--line); display:inline-flex; align-items:center; transition:border-color .15s ease, color .15s ease;}
+  .note a:hover{color:var(--accent); border-color:var(--accent);}
+  .note a:hover .arrow-icon{transform:translate(2px, -2px);}
+
+  /* ---- Project overlay (acts like its own page) ---- */
+  .project-overlay{
+    position:fixed; inset:0; background:var(--bg); z-index:50;
+    overflow-y:auto; opacity:0; visibility:hidden; transform:translateY(14px);
+    transition:opacity .25s ease, transform .25s ease;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  .project-overlay.open{opacity:1; visibility:visible; transform:translateY(0);}
+  .project-overlay-inner{max-width:700px; margin:0 auto; padding:32px 24px 96px; position:relative;}
+  @media (min-width:748px){
+    .project-overlay-inner{padding-left:0; padding-right:0;}
+  }
+  .project-close-bar{
+    display:flex; justify-content:flex-end;
+    position:sticky; top:calc(20px + env(safe-area-inset-top,0px));
+    z-index:10; margin-bottom:16px; pointer-events:none;
+  }
+  .project-close{
+    pointer-events:auto;
+    display:flex; align-items:center; justify-content:center; width:40px; height:40px;
+    border-radius:50%; border:1px solid var(--line); background:var(--bg);
+    cursor:pointer; color:var(--ink); box-shadow:0 2px 10px rgba(0,0,0,.08);
+    transition:border-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .project-close:hover{border-color:var(--accent); color:var(--accent); transform:scale(1.05);}
+  .project-close svg{width:15px; height:15px;}
+  .project-title{
+    font-family:'Fraunces',Georgia,serif; font-weight:500;
+    font-size:clamp(26px,4.5vw,34px); margin:28px 0 20px; line-height:1.25;
+  }
+
+  .project-icon{
+    aspect-ratio:16/9; border-radius:16px; border:1px solid var(--line);
+    overflow:hidden;
+    background:var(--accent-tint);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .project-icon svg{width:30px; height:30px; opacity:.5; color:var(--accent);}
+  .project-intro{
+    font-size:15.5px; line-height:1.6; color:var(--muted);
+    margin:0 0 36px; max-width:60ch;
+  }
+  .project-intro p{color:var(--muted); margin:0 0 14px;}
+  .project-intro p:last-child{margin-bottom:0;}
+  .project-intro strong{color:var(--ink); font-weight:500;}
+  .project-intro .highlight, .project-body .highlight{color:var(--accent); font-weight:600;}
+  .project-body{margin-top:28px;}
+  .project-body p{color:var(--muted); font-size:15px; max-width:60ch; margin:0 0 16px; line-height:1.6;}
+  .project-body .link{display:inline-flex; align-items:center; text-decoration:none; border-bottom:1px solid var(--line); color:var(--ink); transition:color .15s ease, border-color .15s ease;}
+  .project-body .link:hover{color:var(--accent); border-color:var(--accent);}
+  .project-body .link:hover .arrow-icon{transform:translate(2px, -2px);}
+  .project-section{margin-bottom:44px;}
+  .project-section:last-of-type{margin-bottom:0;}
+  .project-badge{
+    display:block; font-size:13px; font-weight:500;
+    color:var(--muted); margin-bottom:4px;
+  }
+  .project-badge .badge-num{
+    color:var(--accent); font-weight:600;
+  }
+  .project-section h3{
+    font-family:'Inter',system-ui,-apple-system,sans-serif; font-weight:600; color:var(--ink);
+    font-size:16.5px; margin:0 0 8px; line-height:1.35;
+  }
+  .project-section.confidential{
+    border-top:1px solid var(--line);
+    padding-top:44px;
+    margin-top:52px;
+    width:100%;
+  }
+  .project-section.confidential h3{
+    font-family:'Fraunces',Georgia,serif; font-weight:500; font-style:normal;
+    font-size:18.5px; color:var(--ink); margin:0 0 10px;
+  }
+  .project-screen-card{
+    display:block; position:relative;
+    width:100%; max-width:480px;
+    border-radius:12px; border:1px solid var(--line);
+    background:var(--bg);
+    margin-top:14px; overflow:hidden;
+    text-decoration:none; color:inherit;
+    cursor:default;
+  }
+  .project-screen-card:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
+  }
+  .project-screen-card img{
+    width:100%; height:auto;
+    display:block;
+  }
+
+  /* Text-based, borderless stream flow diagram */
+  .stream-flow{
+    display:flex;
+    align-items:center;
+    gap:12px 14px;
+    flex-wrap:wrap;
+    margin:14px 0 16px;
+    padding:2px 0;
+  }
+  .stream-node-title{
+    font-family:'Fraunces',Georgia,serif;
+    font-size:15.5px;
+    font-weight:500;
+    color:var(--ink);
+    line-height:1.25;
+    letter-spacing:-0.01em;
+  }
+  .stream-separator{
+    color:var(--accent);
+    font-size:14px;
+    line-height:1;
+    user-select:none;
+  }
+
+  .project-learning-card{
+    margin-top:48px;
+    margin-bottom:0;
+  }
+  .learning-title{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    font-weight:600;
+    font-size:16.5px;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin:0 0 16px;
+    line-height:1.35;
+  }
+  .learning-list{
+    position:relative;
+    margin:0;
+    padding:0 0 0 22px;
+    list-style:none;
+  }
+  .learning-list::before{
+    content:'';
+    position:absolute;
+    left:3px;
+    top:-2px;
+    bottom:-8px;
+    width:1px;
+    background:var(--line);
+  }
+  .learning-list li{
+    position:relative;
+    font-size:14px; line-height:1.6; color:var(--muted);
+    margin-bottom:16px;
+  }
+  .learning-list li:last-child{margin-bottom:0;}
+  .learning-list li::before{
+    content:'';
+    position:absolute;
+    left:-22px;
+    top:7.5px;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px var(--bg);
+  }
+  .learning-list strong{
+    color:var(--ink); font-weight:500;
+  }
+
+  /* ---- Experience / Timeline (Clean, Simple Accent & No Hover Animation) ---- */
+  .timeline-wrap{
+    position:relative;
+    padding-left:22px;
+    margin-top:6px;
+  }
+  .timeline-wrap::before{
+    content:'';
+    position:absolute;
+    left:3px;
+    top:10px;
+    bottom:10px;
+    width:1px;
+    background:var(--line);
+  }
+  .tl-block{
+    position:relative;
+    margin-bottom:34px;
+  }
+  .tl-block:last-of-type{margin-bottom:0;}
+  .tl-block::before{
+    content:'';
+    position:absolute;
+    left:-22px;
+    top:9px;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px var(--bg);
+  }
+  .tl-main{display:flex; align-items:baseline; gap:12px; margin-bottom:10px; flex-wrap:wrap;}
+  .tl-main h3{font-family:'Inter',system-ui,-apple-system,sans-serif; font-weight:600; font-size:18px; margin:0; line-height:1.25; letter-spacing:-0.015em;}
+  .tl-main span{font-size:13px; color:var(--muted); font-weight:500;}
+  .tl-sub{list-style:none; margin:0; padding:0;}
+  .tl-sub li{
+    font-size:14.5px; color:var(--muted); padding:5px 0;
+    line-height:1.55;
+  }
+  .tl-sub b{color:var(--ink); font-weight:500;}
+
+  /* Three single-line internship points */
+  .tl-block.tl-compact{
+    margin-bottom:18px;
+  }
+  .tl-block.tl-compact-last{
+    margin-bottom:34px;
+  }
+  .tl-block.tl-compact .tl-main{
+    margin-bottom:0;
+  }
+  .tl-block.tl-compact h3{
+    font-size:17.5px;
+  }
+
+  /* ---- Sidequests (Bento Grid) ---- */
+  #sidequests{padding-bottom:20px;}
+  .side-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    grid-auto-rows:220px;
+    gap:12px;
+    margin-bottom:0;
+  }
+  .side-tile{
+    position:relative;
+    border-radius:16px;
+    border:1px solid var(--line);
+    background:var(--accent-tint);
+    overflow:hidden;
+  }
+  a.side-tile{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+    cursor:pointer;
+  }
+  a.side-tile:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
+  }
+  .side-tile img{
+    --base-scale: 1;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transform:scale(var(--base-scale));
+    transform-origin:center center;
+    transition:transform .35s cubic-bezier(0.2, 0, 0.2, 1);
+  }
+  .side-tile:hover img{
+    transform:scale(calc(var(--base-scale) * 1.04));
+  }
+
+  /* Bento Tile Geometry */
+  .side-tile.span-vert{
+    grid-column:span 1;
+    grid-row:span 2;
+  }
+  .side-tile.span-2-wide{
+    grid-column:span 2;
+    grid-row:span 1;
+  }
+  .side-tile.span-sq{
+    grid-column:span 1;
+    grid-row:span 1;
+  }
+
+  .side-tile .cap{
+    position:absolute; right:10px; bottom:10px;
+    background:rgba(255, 255, 255, 0.92);
+    backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+    color:#15171B;
+    padding:5px 12px; border-radius:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+    opacity:1; transform:translateY(0);
+    transition:opacity .2s ease, transform .2s ease;
+    pointer-events:none;
+    display:inline-flex; align-items:center;
+  }
+  :root[data-theme="dark"] .side-tile .cap{
+    background:rgba(24, 25, 29, 0.92);
+    color:#EDEDEA;
+  }
+  .side-tile .cap span{font-size:12px; font-weight:500; display:inline-flex; align-items:center;}
+  .side-tile .cap .arrow-icon{width:11px; height:11px; margin-left:4px; vertical-align:-1px;}
+  @media (hover:hover){
+    .side-tile .cap{opacity:0; transform:translateY(6px);}
+    .side-tile:hover .cap, .side-tile:focus-within .cap{opacity:1; transform:translateY(0);}
+  }
+  .side-tile:hover .cap .arrow-icon{transform:translate(1px, -1px);}
+
+  footer, footer.wrap{
+    padding-top:36px;
+    padding-bottom:calc(80px + env(safe-area-inset-bottom,0px));
+    font-size:15px; display:flex; flex-direction:column; gap:22px;
+  }
+  .footer-top{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;}
+  footer .sayhi{font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:22px; line-height:1.2; margin:0;}
+  footer a{color:var(--muted); text-decoration:none; border-bottom:1px solid var(--line); display:inline-flex; align-items:center;}
+  footer a:hover{color:var(--accent); border-color:var(--accent);}
+
+  .arrow-icon{
+    width:13px; height:13px; display:inline-block;
+    vertical-align:-1px; margin-left:4px;
+    transition:transform .15s ease;
+  }
+  .contact-row a{display:inline-flex; align-items:center;}
+  .contact-row a:hover .arrow-icon, footer a:hover .arrow-icon{
+    transform:translate(2px, -2px);
+  }
+
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .nav-links{gap:16px; font-size:13px;}
+    section.block{padding-top:52px; padding-bottom:52px;}
+    #sidequests{padding-bottom:20px;}
+    .hero{padding-top:36px; padding-bottom:48px;}
+    .avatar{width:84px; height:84px; border-radius:20px; margin-bottom:24px;}
+    .featured-grid{gap:20px;}
+    .feature-card{
+      flex-direction:column;
+      align-items:stretch;
+      gap:14px;
+      padding:16px;
+      margin:0;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:var(--accent-tint);
+    }
+    .feature-thumb{
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:12px;
+      height:auto;
+    }
+    .feature-content{
+      width:100%;
+    }
+    .feature-header-row{
+      margin-bottom:6px;
+    }
+    .feature-title{
+      font-size:16px;
+      line-height:1.3;
+    }
+    .feature-sub{
+      font-size:13.5px;
+      line-height:1.45;
+    }
+    .timeline-wrap{padding-left:20px;}
+    .tl-block::before{left:-20px;}
+    .tl-main h3{font-size:17px;}
+
+    /* Sidequests Bento Grid on mobile (modular 2-col layout preserving desktop proportions) */
+    .side-grid{
+      grid-template-columns:repeat(2, 1fr);
+      grid-auto-rows:clamp(145px, 42vw, 175px);
+      gap:10px;
+    }
+    .side-tile{
+      border-radius:14px;
+    }
+    .side-tile.span-sq{
+      grid-column:span 1;
+      grid-row:span 1;
+      height:auto !important;
+      aspect-ratio:auto !important;
+    }
+    .side-tile.span-vert{
+      grid-column:span 1;
+      grid-row:span 2;
+      height:auto !important;
+      aspect-ratio:auto !important;
+    }
+    .side-tile.span-2-wide{
+      grid-column:1 / -1;
+      grid-row:span 1;
+      height:auto !important;
+      aspect-ratio:auto !important;
+    }
+    .side-tile .cap{
+      padding:4px 9px;
+      border-radius:14px;
+      right:8px; bottom:8px;
+    }
+    .side-tile .cap span{
+      font-size:11px;
+    }
+    .side-tile .cap .arrow-icon{
+      width:10px; height:10px;
+    }
+
+    /* Modal Mobile Adjustments */
+    .project-overlay-inner{
+      padding:24px 20px 80px;
+    }
+    .project-icon{
+      border-radius:14px;
+    }
+    .project-title{
+      font-size:26px;
+      margin:22px 0 16px;
+    }
+    .project-intro{
+      font-size:14.5px;
+      margin-bottom:28px;
+    }
+    .project-intro p{
+      margin-bottom:12px;
+    }
+    .project-body p{
+      font-size:14px;
+      margin-bottom:14px;
+    }
+    .project-section{
+      margin-bottom:38px;
+    }
+    .project-section.confidential{
+      border-top:1px solid var(--line);
+      padding-top:36px;
+      margin-top:40px;
+    }
+    .project-screen-card{
+      max-width:100%;
+      margin-top:12px;
+      border-radius:10px;
+    }
+    .stream-flow{
+      gap:8px 10px;
+      margin:12px 0 14px;
+    }
+    .stream-node-title{font-size:14px;}
+    .stream-separator{font-size:13px;}
+    .project-learning-card{
+      margin-top:36px;
+      margin-bottom:0;
+    }
+    .learning-title{
+      font-size:16px;
+      margin-bottom:14px;
+    }
+    .learning-list{
+      padding-left:22px;
+    }
+    .learning-list li{
+      font-size:13.5px;
+      line-height:1.55;
+      margin-bottom:14px;
+    }
+    .learning-list li::before{
+      top:7px;
+      width:7px;
+      height:7px;
+    }
+
+    /* Mobile tap feedback */
+    .side-tile:active{
+      transform:scale(0.985);
+      transition:transform .1s ease;
+    }
+
+    .nav-links a{padding:8px 2px;}
+    .contact-row{gap:12px 18px; margin-top:20px;}
+    .contact-row a{padding:4px 0;}
+    .footer-top{flex-direction:column; align-items:flex-start; gap:12px;}
+    footer, footer.wrap{padding-top:28px; padding-bottom:calc(64px + env(safe-area-inset-bottom,0px));}
+  }
+
+  @media (max-width:380px){
+    .wrap{padding:0 16px;}
+    .project-overlay-inner{padding:20px 14px 72px;}
+    .side-grid{gap:8px; grid-auto-rows:140px;}
+    .feature-card{padding:14px; margin:0; border-radius:14px; gap:12px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="nav-name" href="#top">Anshida</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#sidequests">Sidequests</a>
+      <a class="resume-link" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap" id="top">
+    <div class="avatar">
+      <img src="avatar.jpg" alt="Anshida Ayoob">
+    </div>
+    <h1>Hi, I'm Anshida</h1>
+    <p>I'm a <span class="role">Senior UX Designer</span> at <span class="highlight">Oracle</span> based in Bengaluru. Over the past <span class="highlight">three years</span>, my focus has been on untangling complex, data-heavy systems so the everyday user doesn't have to.</p>
+    <p>I care about asking the right questions upfront to understand user intent, business goals, and technical constraints. Once aligned, I move into fast prototyping to stress-test assumptions and iterate.</p>
+    <div class="contact-row">
+      <a href="resume.pdf" target="_blank" rel="noopener">Resume <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      <a href="mailto:anshidaayoob2001@gmail.com">anshidaayoob2001@gmail.com <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      <a href="https://linkedin.com/in/anshida-ayoob" target="_blank" rel="noopener">LinkedIn <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+    </div>
+  </section>
+
+  <section class="block wrap" id="work">
+    <h2 class="section-title">Work</h2>
+    <p class="section-lede">A mix of enterprise software and independent explorations</p>
+
+    <div class="featured-grid">
+      <button class="feature-card" data-project="oracle">
+        <span class="feature-thumb">
+          <img src="oracle-thumb.jpg" alt="Enterprise UX @ Oracle" loading="lazy">
+        </span>
+        <span class="feature-content">
+          <span class="feature-header-row">
+            <span class="feature-title">Enterprise UX @ Oracle</span>
+            <span class="feature-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+          </span>
+          <span class="feature-sub">Agentic AI apps, real-time behavioral tracking, audience analytics, and visual data workflows.</span>
+        </span>
+      </button>
+
+      <a class="feature-card" href="https://www.behance.net/gallery/154628985/Subtitles-for-Dyslexia" target="_blank" rel="noopener">
+        <span class="feature-thumb">
+          <img src="subtitles-thumb.jpg" alt="Subtitles for Dyslexia" loading="lazy">
+        </span>
+        <span class="feature-content">
+          <span class="feature-header-row">
+            <span class="feature-title">Subtitles for Dyslexia</span>
+            <span class="feature-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+          </span>
+          <span class="feature-sub">Accessibility research and interface design to improve video comprehension for neurodivergent users · 2022</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="note">
+      <p style="margin:0;">Outside of my core projects at Oracle, I've also:</p>
+      <ul>
+        <li>Built an AI agent that placed top 12 of 700+ teams in an internal hackathon</li>
+        <li>Drove the creation of a team-wide UI toolkit to standardise component usage across the marketing design team</li>
+        <li>Partnered with UX researchers to prototype an AI-driven accessibility solution for visually impaired users</li>
+        <li>Currently co-leading an upcoming UX event featuring industry experts</li>
+      </ul>
+    </div>
+    <p class="note">For my earlier projects from 2022 during my Bachelor's, explore my <a href="https://www.behance.net/anshidaayoob" target="_blank" rel="noopener">Behance profile <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>. If you're curious, my <a href="https://drive.google.com/file/d/1kL0796aqYuPM22IDCKjPBhML4XVYTlfX/view?usp=sharing" target="_blank" rel="noopener">final thesis <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a> explored interaction and multimodal feedback in VR.</p>
+  </section>
+
+  <section class="block wrap" id="timeline">
+    <h2 class="section-title">Timeline</h2>
+    <p class="section-lede">Where I've spent the last few years.</p>
+
+    <div class="timeline-wrap">
+      <!-- Top: Oracle -->
+      <div class="tl-block">
+        <div class="tl-main"><h3>Oracle</h3><span>2022 – Present · Bengaluru</span></div>
+        <ul class="tl-sub">
+          <li><b>May 2022:</b> Two‑month UX Design Internship</li>
+          <li><b>July 2023:</b> Joined full‑time as a UX Designer</li>
+          <li><b>October 2025:</b> Promoted to Senior UX Designer</li>
+        </ul>
+      </div>
+
+      <!-- Middle: Three Single-Line Internship Points -->
+      <div class="tl-block tl-compact">
+        <div class="tl-main"><h3>WTA Studios</h3><span>UI/UX Design Intern · 2021</span></div>
+      </div>
+
+      <div class="tl-block tl-compact">
+        <div class="tl-main"><h3>Anveshan</h3><span>UI/UX Design Intern · 2021</span></div>
+      </div>
+
+      <div class="tl-block tl-compact tl-compact-last">
+        <div class="tl-main"><h3>Prishni</h3><span>Graphic Design Intern · 2021</span></div>
+      </div>
+
+      <!-- Bottom: IIT Guwahati -->
+      <div class="tl-block">
+        <div class="tl-main"><h3>IIT Guwahati</h3><span>2019 – 2023</span></div>
+        <ul class="tl-sub">
+          <li><b>Bachelor of Design</b>, Department of Design · 8.59 CPI</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="sidequests">
+    <h2 class="section-title">Sidequests</h2>
+    <p class="section-lede">Things I make, play, and explore outside of work.</p>
+    <div class="side-grid">
+      <!-- 1. Kyrgyzstan (vertical) -->
+      <div class="side-tile span-vert">
+        <img src="sidequests/kyrgyzstan.jpg" alt="Kyrgyzstan" style="object-position:50% 40%;">
+        <div class="cap"><span>Kyrgyzstan</span></div>
+      </div>
+
+      <!-- 2. Crochet (square) -->
+      <div class="side-tile span-sq">
+        <img src="sidequests/crochet.jpg" alt="Crochet" style="object-position:50% 48%;">
+        <div class="cap"><span>Crochet</span></div>
+      </div>
+
+      <!-- 3. Art (square, linked to Instagram) -->
+      <a class="side-tile span-sq" href="https://www.instagram.com/anshokam/" target="_blank" rel="noopener">
+        <img src="sidequests/combined-art.jpg" alt="Art on Instagram" style="object-position:center center;">
+        <div class="cap"><span>Art <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+      </a>
+
+      <!-- 4. Currently reading (square) -->
+      <div class="side-tile span-sq">
+        <img src="sidequests/reading.jpg" alt="Currently reading" style="object-position:50% 45%;">
+        <div class="cap"><span>Currently reading</span></div>
+      </div>
+
+      <!-- 5. Dance (square, scaled 1.16) -->
+      <div class="side-tile span-sq">
+        <img src="sidequests/dance.jpg" alt="Dance" style="object-position:-20% -20%; --base-scale:1.16;">
+        <div class="cap"><span>Dance</span></div>
+      </div>
+
+      <!-- 6. Gaming (2-wide, Elden Ring screenshot) -->
+      <div class="side-tile span-2-wide">
+        <img src="sidequests/gaming.jpg" alt="Gaming" style="object-position:50% 76%;">
+        <div class="cap"><span>Gaming</span></div>
+      </div>
+
+      <!-- 7. Thailand (vertical) -->
+      <div class="side-tile span-vert">
+        <img src="sidequests/thailand.jpg" alt="Thailand" style="object-position:98% 48%;">
+        <div class="cap"><span>Thailand</span></div>
+      </div>
+
+      <!-- 8. Basketball (square) -->
+      <div class="side-tile span-sq">
+        <img src="sidequests/basketball.jpg" alt="Basketball" style="object-position:43% 50%;">
+        <div class="cap"><span>Basketball</span></div>
+      </div>
+
+      <!-- 9. Music (square, linked to Spotify) -->
+      <a class="side-tile span-sq" href="https://open.spotify.com/track/3qISOUWmtX2Qji94rPbx5u" target="_blank" rel="noopener">
+        <img src="sidequests/music.jpg" alt="Rauf &amp; Faik - Вечера" style="object-position:50% 50%;">
+        <div class="cap"><span>Music <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+      </a>
+
+      <!-- 10. Malaysia (vertical) -->
+      <div class="side-tile span-vert">
+        <img src="sidequests/malaysia.jpg" alt="Malaysia" style="object-position:78% 50%;">
+        <div class="cap"><span>Malaysia</span></div>
+      </div>
+
+      <!-- 11. We go jim (square) -->
+      <div class="side-tile span-sq">
+        <img src="sidequests/gym-cat.jpg" alt="We go jim" style="object-position:50% 55%;">
+        <div class="cap"><span>We go jim</span></div>
+      </div>
+
+      <!-- 12. Puzzles (square, scaled 1.24) -->
+      <div class="side-tile span-sq">
+        <img src="sidequests/puzzle.jpg" alt="Jigsaw Puzzle" style="object-position:71% -19%; --base-scale:1.24;">
+        <div class="cap"><span>Puzzles</span></div>
+      </div>
+
+      <!-- 13. Volunteering (square, scaled 1.24) -->
+      <div class="side-tile span-sq">
+        <img src="sidequests/community.jpg" alt="Volunteering" style="object-position:91% 49%; --base-scale:1.24;">
+        <div class="cap"><span>Volunteering</span></div>
+      </div>
+
+      <!-- 14. Anime (square, high-res) -->
+      <div class="side-tile span-sq">
+        <img src="sidequests/anime.jpg" alt="Anime" style="object-position:50% 20%;">
+        <div class="cap"><span>Anime</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="footer-top">
+    <span class="sayhi">Say hi</span>
+    <a href="mailto:anshidaayoob2001@gmail.com">anshidaayoob2001@gmail.com <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+    <a href="https://linkedin.com/in/anshida-ayoob" target="_blank" rel="noopener">LinkedIn <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+  </div>
+</footer>
+
+<div class="project-overlay" id="project-overlay">
+  <div class="project-overlay-inner">
+    <div class="project-close-bar">
+      <button class="project-close" id="project-close" aria-label="Close project">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div id="project-overlay-body">
+      <span class="project-icon">
+        <img src="oracle-thumb.jpg" alt="Enterprise UX @ Oracle" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block;">
+      </span>
+      <h2 class="project-title">Enterprise UX @ Oracle</h2>
+      <div class="project-intro">
+        <p>At Oracle, I work within <span class="highlight">the CX Marketing suite</span>, primarily on the <strong>Fusion Unity Customer Data Platform (CDP)</strong>, a system that unifies customer data from disparate online, offline, and enterprise sources into dynamic 360-degree profiles for real-time personalization.</p>
+        <p>My work spans data-heavy projects across analytics dashboards, data transformations, and SQL editors, with a strong focus over the past year on <span class="highlight">conversational interfaces and agentic AI</span>. I design interaction patterns that transition enterprise software from passive "systems of record" into proactive "systems of outcomes".</p>
+        <p>I've been the <span class="highlight">lead designer on multiple high-impact projects</span>, some of which I owned solo from end to end. To design for complex technical domains, I build a working understanding of the underlying concepts myself, using tools like OpenAI Codex and Figma Make to prototype interactions quickly.</p>
+      </div>
+
+      <div class="project-body">
+        <div class="project-section">
+          <span class="project-badge">Focus Area <span class="badge-num">01</span></span>
+          <h3>ML Model Lifecycle: From Hackathon Pitch to Shipped Agentic App</h3>
+          <p>While designing dashboards to track ML model performance across the marketing funnel, my PM, a co-designer, and I saw how complex model setup was for marketers, despite being closest to the business scenarios. To solve this, we teamed up with an engineer to enter Oracle's AI agent hackathon. Together, we architected the multi-agent team structure, while I focused on the agent setup, prompt engineering trials, and visual storytelling for the pitch. Our concept advanced to the <span class="highlight">Global Finals (Top 12 out of 700+ teams)</span>, leading the proof-of-concept to be <span class="highlight">adopted into the core product roadmap</span>, launched in production, and enhanced over the next two releases.</p>
+          <p>The resulting agentic app makes machine learning accessible to business users without data science expertise. A marketer describes their campaign objective, and the agent matches it with purpose-built predictive models, explains the recommendation with transparent reasoning, and automatically validates data readiness, <span class="highlight">compressing weeks of technical discovery into just a few clicks</span>.</p>
+          <div class="project-screen-card">
+            <img src="oracle-agentic-app.png" alt="ML Model Lifecycle: From Hackathon Pitch to Shipped Agentic App" loading="lazy">
+          </div>
+        </div>
+
+        <div class="project-section">
+          <span class="project-badge">Focus Area <span class="badge-num">02</span></span>
+          <h3>Real-Time Behavioral Data: Leading the End-to-End Experience</h3>
+          <p>As the <span class="highlight">sole designer owning the real-time behavioral data pipeline</span> end to end, I tackled a key bottleneck: marketers depended on web developers to capture digital activity like clicks, page views, and form submissions. I redesigned the setup into a self-serve experience, navigating complex tech stack constraints and validating the UX with users at key points throughout the process.</p>
+
+          <div class="stream-flow" aria-label="Behavioral tracking flow: Setup Tracking to Define Triggers to Verify Live Data">
+            <span class="stream-node-title">Setup Tracking</span>
+            <span class="stream-separator" aria-hidden="true">&rarr;</span>
+            <span class="stream-node-title">Define Triggers</span>
+            <span class="stream-separator" aria-hidden="true">&rarr;</span>
+            <span class="stream-node-title">Verify Live Data</span>
+          </div>
+
+          <p>We are now taking this further with AI assistance, where an agent suggests what to measure based on page content, while marketers point and click to refine. Their selections flow directly into downstream campaigns, <span class="highlight">removing the technical setup completely</span>.</p>
+
+          <div class="project-screen-card">
+            <img src="oracle-data-collection.png" alt="Real-Time Behavioral Data: Leading the End-to-End Experience" loading="lazy">
+          </div>
+        </div>
+
+        <div class="project-section">
+          <span class="project-badge">Focus Area <span class="badge-num">03</span></span>
+          <h3>Audience Analytics: From Dashboards to Conversations</h3>
+          <p>Across multiple projects, I developed a strong understanding of <span class="highlight">data visualization</span>, learning to choose the right chart and interaction for each type of information. I also worked on another flavor of analytics, designing an <span class="highlight">in-context AI agent</span> that helps marketers understand their audience composition through natural language and make better decisions.</p>
+          <div class="project-screen-card">
+            <img src="analytics.png" alt="Audience Analytics: From Dashboards to Conversations" loading="lazy">
+          </div>
+        </div>
+
+        <div class="project-section">
+          <span class="project-badge">Focus Area <span class="badge-num">04</span></span>
+          <h3>Data Workflows: Balancing Technical Depth and Simplicity</h3>
+          <p>Highly technical users often prefer code, while less technical users need intuitive visual tools. Across data transformation and SQL editing workflows, my core challenge was designing interfaces that <span class="highlight">mirror the mental model of how an SQL query is written</span>, pairing visual simplicity with system guardrails to prevent security and governance risks.</p>
+          <div class="project-screen-card">
+            <img src="Data Workbench.png" alt="Data Workflows: Balancing Technical Depth and Simplicity" loading="lazy">
+          </div>
+        </div>
+
+        <div class="project-learning-card">
+          <h3 class="learning-title">Continuous Learning</h3>
+          <ul class="learning-list">
+            <li>Completed coursework in Machine Learning (Stanford / DeepLearning.AI), Prompt Engineering (IBM), and SQL (Kaggle) to adapt quickly to technical domains.</li>
+            <li>Leverages OpenAI Codex skills with Figma MCP and Figma Make for day-to-day context gathering and rapid prototyping.</li>
+          </ul>
+        </div>
+
+        <div class="project-section confidential">
+          <h3>Confidentiality & Walkthrough</h3>
+          <p>Because these enterprise products are proprietary and under NDA, detailed mocks and production flows cannot be published publicly. I am always happy to discuss my design thinking, component systems, and workflow architectures in a <a class="link" href="mailto:anshidaayoob2001@gmail.com">1-on-1 walkthrough <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>.</p>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var overlay = document.getElementById('project-overlay');
+  var body = document.getElementById('project-overlay-body');
+  var closeBtn = document.getElementById('project-close');
+
+
+  function open(key){
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function close(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.feature-card[data-project]').forEach(function(card){
+    card.addEventListener('click', function(){
+      open(card.getAttribute('data-project'));
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && overlay.classList.contains('open')) close();
+  });
+})();
+</script>
+
+</body>
+</html>
