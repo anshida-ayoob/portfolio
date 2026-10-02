@@ -171,23 +171,27 @@
   .project-intro p:last-child{margin-bottom:0;}
   .project-intro strong{color:var(--ink); font-weight:500;}
   .project-intro .highlight, .project-body .highlight{color:var(--accent); font-weight:600;}
-  .project-body{margin-top:28px;}
-  .project-body p{color:var(--muted); font-size:15px; max-width:60ch; margin:0 0 16px; line-height:1.6;}
+  .project-body{
+    border-top:1px solid var(--line);
+    padding-top:48px;
+    margin-top:40px;
+  }
+  .project-body p{color:var(--muted); font-size:15px; max-width:60ch; margin:0 0 18px; line-height:1.6;}
   .project-body .link{display:inline-flex; align-items:center; text-decoration:none; border-bottom:1px solid var(--line); color:var(--ink); transition:color .15s ease, border-color .15s ease;}
   .project-body .link:hover{color:var(--accent); border-color:var(--accent);}
   .project-body .link:hover .arrow-icon{transform:translate(2px, -2px);}
-  .project-section{margin-bottom:44px;}
+  .project-section{margin-bottom:64px;}
   .project-section:last-of-type{margin-bottom:0;}
   .project-badge{
     display:block; font-size:13px; font-weight:500;
     color:var(--muted); margin-bottom:4px;
   }
   .project-badge .badge-num{
-    color:var(--accent); font-weight:600;
+    color:inherit; font-weight:500;
   }
   .project-section h3{
     font-family:'Inter',system-ui,-apple-system,sans-serif; font-weight:600; color:var(--ink);
-    font-size:16.5px; margin:0 0 8px; line-height:1.35;
+    font-size:16.5px; margin:0 0 15px; line-height:1.35;
   }
   .project-section.confidential{
     border-top:1px solid var(--line);
@@ -204,9 +208,13 @@
     width:100%; max-width:480px;
     border-radius:12px; border:1px solid var(--line);
     background:var(--bg);
-    margin-top:14px; overflow:hidden;
+    box-shadow:0 4px 20px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+    margin-top:22px; overflow:hidden;
     text-decoration:none; color:inherit;
     cursor:default;
+  }
+  :root[data-theme="dark"] .project-screen-card{
+    box-shadow:0 4px 24px rgba(0,0,0,0.35);
   }
   .project-screen-card:focus-visible{
     outline:2px solid var(--accent);
@@ -223,7 +231,7 @@
     align-items:center;
     gap:12px 14px;
     flex-wrap:wrap;
-    margin:14px 0 16px;
+    margin:18px 0 20px;
     padding:2px 0;
   }
   .stream-node-title{
@@ -242,8 +250,9 @@
   }
 
   .project-learning-card{
-    margin-top:48px;
+    margin-top:64px;
     margin-bottom:0;
+    max-width:60ch;
   }
   .learning-title{
     font-family:'Inter',system-ui,-apple-system,sans-serif;
@@ -264,8 +273,8 @@
     content:'';
     position:absolute;
     left:3px;
-    top:-2px;
-    bottom:-8px;
+    top:10px;
+    bottom:10px;
     width:1px;
     background:var(--line);
   }
@@ -831,7 +840,7 @@
       </span>
       <h2 class="project-title">Enterprise UX @ Oracle</h2>
       <div class="project-intro">
-        <p>At Oracle, I work within <span class="highlight">the CX Marketing suite</span>, primarily on the <strong>Fusion Unity Customer Data Platform (CDP)</strong>, a system that unifies customer data from disparate online, offline, and enterprise sources into dynamic 360-degree profiles for real-time personalization.</p>
+        <p>At Oracle, I work within <span class="highlight">the CX Marketing suite</span>, primarily on the Fusion Unity Customer Data Platform (CDP), a system that unifies customer data from disparate online, offline, and enterprise sources into dynamic 360-degree profiles for real-time personalization.</p>
         <p>My work spans data-heavy projects across analytics dashboards, data transformations, and SQL editors, with a strong focus over the past year on <span class="highlight">conversational interfaces and agentic AI</span>. I design interaction patterns that transition enterprise software from passive "systems of record" into proactive "systems of outcomes".</p>
         <p>I've been the <span class="highlight">lead designer on multiple high-impact projects</span>, some of which I owned solo from end to end. To design for complex technical domains, I build a working understanding of the underlying concepts myself, using tools like OpenAI Codex and Figma Make to prototype interactions quickly.</p>
       </div>
